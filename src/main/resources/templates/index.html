@@ -8,8 +8,9 @@
 
 <h2>Добро пожаловать в нашу библиотеку</h2>
 <a href="/books/">Список книг</a><br>
-<a href="/books/new">Новая книга</a>
-<br><a href="/authors/new">Добавить автора</a><br>
+<a href="/books/new">Новая книга</a><br>
+<a href="/authors/">Список авторов</a><br>
+<a href="/authors/new">Добавить автора</a><br>
 <ul>
     <li th:each="book : ${books}">
         <span th:text="${book.title}">Название</span>

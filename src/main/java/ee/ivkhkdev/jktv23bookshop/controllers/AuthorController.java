@@ -17,6 +17,11 @@ public class AuthorController {
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
+    @GetMapping("/")
+    public String showListAuthorsForm(Model model) {
+        model.addAttribute("authors", authorService.list());
+        return "/authors/listAuthors";
+    }
 
     @GetMapping("/new")
     public String showAddAuthorForm(Model model) {

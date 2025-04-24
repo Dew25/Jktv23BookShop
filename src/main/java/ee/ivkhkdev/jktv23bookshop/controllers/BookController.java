@@ -41,7 +41,7 @@ public class BookController {
         model.addAttribute("book", new Book());
         List<Author> authors = authorService.list();
         model.addAttribute("authors", authors);
-        return "add-book";
+        return "books/add-book";
     }
 
     @PostMapping("/save")

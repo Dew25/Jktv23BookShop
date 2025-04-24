@@ -21,7 +21,7 @@ public class AuthorController {
     @GetMapping("/new")
     public String showAddAuthorForm(Model model) {
         model.addAttribute("author", new Author());
-        return "add-author";
+        return "/authors/add-author";
     }
 
     @PostMapping("/save")

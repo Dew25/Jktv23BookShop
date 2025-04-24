@@ -1,0 +1,17 @@
+services:
+  mariadb-java:
+    image: mariadb:latest
+    container_name: mariadb-java
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=jktv23bookshop
+    volumes:
+      - ./java/mariadb-java/init.d:/docker-entrypoint-initdb.d
+      - ./java/mariadb-java/data:/var/lib/mysql
+    networks:
+      - java-network
+
+networks:
+  java-network:
+    driver: bridge

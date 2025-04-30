@@ -5,10 +5,27 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=rootpass
-      - MYSQL_DATABASE=jktv23bookshop
+      - MYSQL_DATABASE=mysite
     volumes:
       - ./java/mariadb-java/init.d:/docker-entrypoint-initdb.d
       - ./java/mariadb-java/data:/var/lib/mysql
+    networks:
+      - java-network
+  mysite:
+    build: .
+    container_name: mysite
+    networks:
+      - java-network
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    depends_on:
+      - mariadb-java
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
     networks:
       - java-network
 

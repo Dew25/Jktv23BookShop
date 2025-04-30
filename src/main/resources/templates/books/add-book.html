@@ -4,7 +4,7 @@
   <title>Добавить книгу</title>
 </head>
 <body>
-<a href="/books/">← К списку книг</a> | <a href="/authors/new"> Добавить нового автора</a><br/><br/>
+<a th:href="@{/books/}">← К списку книг</a> | <a th:href="@{/authors/new}"> Добавить нового автора</a><br/><br/>
 
 <h1>Добавление книги</h1>
 <form action="/books/save" method="post" enctype="multipart/form-data">

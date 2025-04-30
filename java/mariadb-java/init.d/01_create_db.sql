@@ -1,2 +1,2 @@
-CREATE DATABASE IF NOT EXISTS jktv23bookshop;
-USE jktv23bookshop;
+CREATE DATABASE IF NOT EXISTS mysite;
+USE mysite;

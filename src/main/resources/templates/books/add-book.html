@@ -7,7 +7,7 @@
 <a th:href="@{/books/}">← К списку книг</a> | <a th:href="@{/authors/new}"> Добавить нового автора</a><br/><br/>
 
 <h1>Добавление книги</h1>
-<form action="/books/save" method="post" enctype="multipart/form-data">
+<form th:action="@{/books/save}" method="post" enctype="multipart/form-data">
   <label>Название книги:
     <input type="text" name="title" required />
   </label><br/><br/>

@@ -8,7 +8,7 @@
 
 <h1>Добавление автора</h1>
 
-<form action="/authors/save" method="post">
+<form th:action="@{/authors/save}" method="post">
   <label>Имя автора:
     <input type="text" name="firstname" required />
   </label><br/>

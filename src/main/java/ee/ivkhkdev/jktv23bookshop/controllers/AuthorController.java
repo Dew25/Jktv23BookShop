@@ -20,13 +20,13 @@ public class AuthorController {
     @GetMapping("/")
     public String showListAuthorsForm(Model model) {
         model.addAttribute("authors", authorService.list());
-        return "/authors/listAuthors";
+        return "authors/listAuthors";
     }
 
     @GetMapping("/new")
     public String showAddAuthorForm(Model model) {
         model.addAttribute("author", new Author());
-        return "/authors/add-author";
+        return "authors/add-author";
     }
 
     @PostMapping("/save")

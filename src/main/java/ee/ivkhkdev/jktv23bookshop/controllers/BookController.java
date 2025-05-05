@@ -71,6 +71,6 @@ public class BookController {
             }
         }
         bookService.add(book);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 }

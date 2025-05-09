@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="contentListUsers">
+  <h2>Список <пользователей</пользователе></h2>
+  <ul>
+    <li th:each="appUser : ${appUsers}">
+      <span th:text="${appUser.getUsername}">Название</span>
+      — <span th:each="author : ${book.authors}" th:text="${author.firstname} + ' ' + ${author.lastname} + '. '"></span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

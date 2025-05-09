@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Добавить автора</title>
-</head>
+
 <body>
-<a href="/books/new">← Назад к добавлению книги</a> | <a href="/">На главную</a>
-
-<h1>Добавление автора</h1>
-
-<form action="/authors/save" method="post">
-  <label>Имя автора:
-    <input type="text" name="firstname" required />
-  </label><br/>
-  <label>Фамилия автора:
-    <input type="text" name="lastname" required />
-  </label><br/><br/>
-  <button type="submit">Сохранить</button>
-</form>
-
-
-</body>
-</html>
-
-
+<div th:fragment="contentAddAuthor">
+  <h1>Добавление автора</h1>
+  <form th:action="/authors/save" method="post">
+    <label>Имя автора:
+      <input type="text" name="firstname" required />
+    </label><br/>
+    <label>Фамилия автора:
+      <input type="text" name="lastname" required />
+    </label><br/><br/>
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
 </body>
 </html>

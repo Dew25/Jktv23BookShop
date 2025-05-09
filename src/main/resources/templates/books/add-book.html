@@ -4,28 +4,28 @@
   <title>Добавить книгу</title>
 </head>
 <body>
-<a href="/books/">← К списку книг</a> | <a href="/authors/new"> Добавить нового автора</a><br/><br/>
-
-<h1>Добавление книги</h1>
-<form action="/books/save" method="post" enctype="multipart/form-data">
-  <label>Название книги:
-    <input type="text" name="title" required />
-  </label><br/><br/>
-  <label>Год издания:
-    <input type="text" name="publishedYear" required />
-  </label><br/><br/>
-  <label>Выберите авторов:</label><br/>
-  <div th:each="author : ${authors}">
-    <label>
-      <input type="checkbox" name="authorIds" th:value="${author.id}" />
-      <span th:text="|${author.firstname} ${author.lastname}|">Имя автора</span>
-    </label><br/>
-  </div>
-  <br/>
-  <label>Обложка книги:
-    <input type="file" name="coverFile" accept="image/*" />
-  </label><br/><br/>
-  <button type="submit">Сохранить книгу</button>
-</form>
+<div th:fragment="contentAddBook">
+  <h1>Добавление книги</h1>
+  <form th:action="/books/save" method="post" enctype="multipart/form-data">
+    <label>Название книги:
+      <input type="text" name="title" required />
+    </label><br/><br/>
+    <label>Год издания:
+      <input type="text" name="publishedYear" required />
+    </label><br/><br/>
+    <label>Выберите авторов:</label><br/>
+    <div th:each="author : ${authors}">
+      <label>
+        <input type="checkbox" name="authorIds" th:value="${author.id}" />
+        <span th:text="|${author.firstname} ${author.lastname}|">Имя автора</span>
+      </label><br/>
+    </div>
+    <br/>
+    <label>Обложка книги:
+      <input type="file" name="coverFile" accept="image/*" />
+    </label><br/><br/>
+    <button type="submit">Сохранить книгу</button>
+  </form>
+</div>
 </body>
 </html>

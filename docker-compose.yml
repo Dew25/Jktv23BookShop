@@ -1,17 +1,35 @@
+version: '3.8'
 services:
-  mariadb-java:
+  mariadb:
     image: mariadb:latest
-    container_name: mariadb-java
-    restart: always
+    container_name: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpass
-      - MYSQL_DATABASE=jktv23bookshop
+      MARIADB_ROOT_PASSWORD: rootpass  # Используйте MARIADB_ вместо MYSQL_
+      MARIADB_DATABASE: jktv23bookshop
+      MARIADB_USER: jktv23bookshop
+      MARIADB_PASSWORD: jktv23bookshop
+      MARIADB_ROOT_HOST: '%'
+      
+    ports:
+      - "3306:3306"
     volumes:
-      - ./java/mariadb-java/init.d:/docker-entrypoint-initdb.d
-      - ./java/mariadb-java/data:/var/lib/mysql
-    networks:
-      - java-network
+      - mariadb_data:/var/lib/mysql
+    restart: unless-stopped
+   
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    depends_on:
+      - mariadb
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    ports:
+      - "80:80"
+    restart: unless-stopped
 
+volumes:
+  mariadb_data:
 networks:
-  java-network:
-    driver: bridge
+  xampp-docker_default:
+    external: true

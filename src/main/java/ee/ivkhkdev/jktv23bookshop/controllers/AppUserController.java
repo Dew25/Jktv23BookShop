@@ -1,14 +1,15 @@
 package ee.ivkhkdev.jktv23bookshop.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/users")
 public class AppUserController {
     @RequestMapping("/list")
-    public String listUsers(Module model) {
-        model.addAttribute("content", "pages/user");
+    public String listUsers(Model model) {
+        model.addAttribute("content", "/users/listUsers");
         return "layout";
 
     }

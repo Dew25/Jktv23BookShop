@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -23,7 +20,7 @@ public class AppUser implements java.io.Serializable, UserDetails {
     private String lastname;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles = Set.of();
+    private Set<String> roles = new HashSet<>();
 
 
     public AppUser() {

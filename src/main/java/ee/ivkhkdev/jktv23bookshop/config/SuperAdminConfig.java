@@ -1,5 +1,6 @@
 package ee.ivkhkdev.jktv23bookshop.config;
 
+import ee.ivkhkdev.jktv23bookshop.model.Roles;
 import ee.ivkhkdev.jktv23bookshop.model.entity.AppUser;
 import ee.ivkhkdev.jktv23bookshop.services.AppUserService;
 import org.springframework.boot.CommandLineRunner;
@@ -22,9 +23,11 @@ public class SuperAdminConfig {
         return args -> {
             if (!(appUserService.allUsers().size() > 0)) {
                 AppUser admin = new AppUser();
-                admin.getRoles().add("ADMIN");
-                admin.getRoles().add("MANAGER");
-                admin.getRoles().add("USER");
+                admin.setFirstname("Juri");
+                admin.setLastname("Melnikov");
+                admin.getRoles().add(Roles.USER);
+                admin.getRoles().add(Roles.MANAGER);
+                admin.getRoles().add(Roles.ADMINISTRATOR);
                 admin.setUsername("admin");
                 admin.setPassword(passwordEncoder.encode("12345"));
                 appUserService.save(admin);

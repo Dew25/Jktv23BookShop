@@ -31,9 +31,10 @@ public class BookController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("content", "/books/listBooks");
         model.addAttribute("books", bookService.list());
 
-        return "index";
+        return "layout";
     }
 
     @GetMapping("/new")

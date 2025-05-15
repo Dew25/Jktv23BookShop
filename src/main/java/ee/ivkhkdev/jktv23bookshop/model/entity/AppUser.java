@@ -1,14 +1,12 @@
 package ee.ivkhkdev.jktv23bookshop.model.entity;
 
+import ee.ivkhkdev.jktv23bookshop.model.Roles;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,8 +20,11 @@ public class AppUser implements java.io.Serializable, UserDetails {
     private String firstname;
     private String lastname;
 
+
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles = Set.of();
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> roles = new HashSet<>();  // где RoleType - enum
 
 
     public AppUser() {
@@ -37,11 +38,11 @@ public class AppUser implements java.io.Serializable, UserDetails {
         this.id = id;
     }
 
-    public Set<String> getRoles() {
+    public Set<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
 
@@ -96,7 +97,7 @@ public class AppUser implements java.io.Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.name())).collect(Collectors.toSet());
     }
 
     @Override

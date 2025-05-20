@@ -1,30 +1,24 @@
 package ee.ivkhkdev.jktv23bookshop.services;
 
-import ee.ivkhkdev.jktv23bookshop.model.entity.AppUser;
-import ee.ivkhkdev.jktv23bookshop.model.repositories.AppUserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import ee.ivkhkdev.jktv23bookshop.model.entity.AppUserDetails;
+import ee.ivkhkdev.jktv23bookshop.model.repositories.AppUserDetailsRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.net.PasswordAuthentication;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppUserService {
-    private AppUserRepository appUserRepository;
-    private PasswordEncoder passwordEncoder;
-
-    public AppUserService(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
-        this.appUserRepository = appUserRepository;
-        this.passwordEncoder = passwordEncoder;
+    private AppUserDetailsRepository appUserDetailsRepository;
+    public AppUserService(AppUserDetailsRepository appUserDetailsRepository) {
+        this.appUserDetailsRepository = appUserDetailsRepository;
     }
-
-    public List<AppUser> allUsers() {
-        return appUserRepository.findAll();
+    public List<AppUserDetails> allUsers() {
+        return appUserDetailsRepository.findAll();
     }
-
-    public void save(AppUser admin) {
-        appUserRepository.save(admin);
+    public void save(AppUserDetails admin) {
+        appUserDetailsRepository.save(admin);
     }
 }
 

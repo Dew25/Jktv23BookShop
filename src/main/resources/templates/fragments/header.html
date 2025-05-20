@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+      lang="ru" th:fragment="header">
 <body>
-<header th:fragment="header">
+<header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/}">JKTV23BookShop</a>
@@ -13,29 +13,56 @@
             <span></span>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Книги
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="@{/books/listBooks}" sec:authorize="hasAnyRole('USER')">Список книг</a></li>
+                            <li><a class="dropdown-item" href="@{/books/addBook}" sec:authorize="hasAnyRole('MANAGER')">Добавить книгу</a></li>
+                            <li><hr class="dropdown-divider" sec:authorize="hasAnyRole('MANAGER')"></li>
+                            <li><a class="dropdown-item" href="@{/authors/listAuthors}" sec:authorize="hasAnyRole('MANAGER')">Список авторов</a></li>
+                            <li><a class="dropdown-item" href="@{/authors/addAuthor}" sec:authorize="hasAnyRole('MANAGER')">Добавить автора</a></li>
+                        </ul>
+                    </li><li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Пользователь
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="@{/books/listBooks}" sec:authorize="hasAnyRole('USER')">Профиль пользователя</a></li>
+                            <li><a class="dropdown-item" href="@{/books/addBook}" sec:authorize="hasAnyRole('MANAGER')">Список пользователей</a></li>
+                        </ul>
+                    </li><li class="nav-item dropdown" sec:authorize="hasAnyRole('ADMINISTRATOR')">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Администратор
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="@{/admin/adminPanel}">Панель администратора</a></li>
+                            <li><a class="dropdown-item" href="@{/admin/rangReadingBooks}">Рейтинг читаемости книг</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item" sec:authorize="hasAuthority('USER')">
-                        <a class="nav-link" th:href="@{/users}">Пользователь</a>
-                    <li class="nav-item" sec:authorize="hasAuthority('MANAGER')">
-                        <a class="nav-link" th:href="@{/managers}">Менеджер</a>
-                    </li><li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                    <a class="nav-link" th:href="@{/admins}">Admin</a>
-                </li><li class="nav-item" >
-                    <a class="nav-link" th:href="@{/registration}">Registration</a>
-                </li>
-
                 </ul>
                 <ul class="navbar-nav d-flex justify-content-end mb-2 mb-lg-0">
-                    </li> </li><li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/loginForm}">Login</a>
-                </li></li> </li><li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form class="" th:action="@{/logout}" method="POST">
-                        <input class="nav-link" type="submit" value="Logout"/>
-                    </form>
-                </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <span class="nav-link">[<span sec:authentication="name"></span>]</span>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" th:href="@{/registrationForm}">Регистрация</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" th:href="@{/loginForm}">Вход</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="POST">
+<!--                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+                            <button type="submit" class="nav-link" style="background:none; border:none; cursor:pointer;">
+                                Выход
+                            </button>
+                        </form>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </nav>

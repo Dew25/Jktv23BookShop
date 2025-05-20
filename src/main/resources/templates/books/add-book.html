@@ -4,28 +4,43 @@
   <title>Добавить книгу</title>
 </head>
 <body>
-<div th:fragment="content">
-  <h1>Добавление книги</h1>
-  <form th:action="/books/save" method="post" enctype="multipart/form-data">
-    <label>Название книги:
-      <input type="text" name="title" required />
-    </label><br/><br/>
-    <label>Год издания:
-      <input type="text" name="publishedYear" required />
-    </label><br/><br/>
-    <label>Выберите авторов:</label><br/>
-    <div th:each="author : ${authors}">
-      <label>
-        <input type="checkbox" name="authorIds" th:value="${author.id}" />
-        <span th:text="|${author.firstname} ${author.lastname}|">Имя автора</span>
-      </label><br/>
+
+    <div th:fragment="content" class="w-100 d-flex justify-content-center">
+      <form th:action="@{/authors/save}" method="POST">
+        <div class="card border-0" style="width: 40rem;">
+          <div class="card-body">
+            <h4 class="card-title m-3 w-100 d-flex justify-content-center">Новая книга</h4>
+            <div class="mb-3 row">
+              <label for="inputFirstname" class="col-sm-2 col-form-label">Название</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputFirstname" name="title" value="">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label>Выберите авторов:</label><br/>
+              <div th:each="author : ${authors}">
+                <label>
+                  <input type="checkbox" name="authorIds" th:value="${author.id}" />
+                  <span th:text="|${author.firstname} ${author.lastname}|">Имя автора</span>
+                </label><br/>
+              </div>
+
+            </div>
+            <div class="mb-3 row">
+              <label>Обложка книги:
+                <input type="file" name="coverFile" accept="image/*" />
+              </label>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-12 w-100 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mb-3 w-35">Сохранить книгу</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-    <br/>
-    <label>Обложка книги:
-      <input type="file" name="coverFile" accept="image/*" />
-    </label><br/><br/>
-    <button type="submit">Сохранить книгу</button>
-  </form>
-</div>
+
 </body>
 </html>

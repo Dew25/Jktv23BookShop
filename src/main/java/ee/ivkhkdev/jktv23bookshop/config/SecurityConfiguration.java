@@ -45,8 +45,8 @@ public class SecurityConfiguration {
                                 "/registrationForm",
                                 "/registration"
                         ).permitAll()
-                        .requestMatchers("/user/**").hasAuthority("ROLE_USER")
-                        .requestMatchers("/manager/**").hasAuthority("ROLE_MANAGER")
+                        .requestMatchers("/books/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/authors/**").hasAuthority("ROLE_MANAGER")
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMINSTRATOR")
                         .anyRequest().authenticated()
                 )

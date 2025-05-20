@@ -3,6 +3,7 @@ package ee.ivkhkdev.jktv23bookshop.model.entity;
 import jakarta.persistence.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Author {
     private String firstname;
     private String lastname;
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.MERGE)
-    private Set<Book> books;
+    private Set<Book> books=new HashSet<>();
 
     public Author() {
     }

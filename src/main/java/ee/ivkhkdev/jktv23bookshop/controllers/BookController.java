@@ -33,16 +33,17 @@ public class BookController {
     public String index(Model model) {
         model.addAttribute("content", "/books/listBooks");
         model.addAttribute("books", bookService.list());
-
         return "layout";
     }
 
     @GetMapping("/new")
     public String showAddBookForm(Model model) {
-        model.addAttribute("book", new Book());
+        model.addAttribute("content","/books/add-book");
+        List<Book> books = bookService.list();
         List<Author> authors = authorService.list();
-        model.addAttribute("authors", authors);
-        return "books/add-book";
+        model.addAttribute("authors",authors);
+        model.addAttribute("books", books);
+        return "layout";
     }
 
     @PostMapping("/save")
@@ -72,6 +73,6 @@ public class BookController {
             }
         }
         bookService.add(book);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 }
